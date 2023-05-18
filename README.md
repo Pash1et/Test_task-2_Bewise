@@ -31,3 +31,14 @@
 - В корне директории test_task-2_bewise создать файл .env и заполнить его по примеру .env.example
 - В папке infra выполнить команду ```docker compose up -d```
 - Перейти по адресу ```http://127.0.0.1:8000/docs```
+
+### Примеры запросов
+![1](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/06273489-4125-482b-993e-749c89291fc1)
+![2](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/b0baa53e-481e-4f41-9fc8-de05fc66bc65)
+![3](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/01cff986-8631-4e8d-be51-0697f656ed45)
+![4](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/61c40120-4e05-40ba-8dc1-8a6d23ce18fd)
+![5](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/cb6b0a91-d300-45d9-b660-5625fe989077)
+![6](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/f4df37d2-a914-4d4f-aed8-d8577b6936ee)
+![7](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/ca236279-3ec5-4da0-ade3-136f35fe9f6e)
+
+
