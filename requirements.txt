@@ -3,3 +3,4 @@ alembic
 sqlalchemy
 psycopg2
 python-dotenv
+pydub

@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from config import (POSTGRES_USER, POSTGRES_PASSWORD,
-                    DB_HOST, DB_PORT, POSTGRES_DB)
+from sqlalchemy.orm import sessionmaker
 
+from config import (DB_HOST, DB_PORT, POSTGRES_DB, POSTGRES_PASSWORD,
+                    POSTGRES_USER)
 
 DB_URL = (f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@'
           f'{DB_HOST}:{DB_PORT}/{POSTGRES_DB}')

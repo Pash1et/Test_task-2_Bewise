@@ -9,3 +9,6 @@ DB_PORT = os.getenv('DB_PORT')
 POSTGRES_DB = os.getenv('POSTGRES_DB')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_USER')
 POSTGRES_USER = os.getenv('POSTGRES_PASSWORD')
+
+HOST = os.getenv('HOST')
+PORT = os.getenv('PORT')

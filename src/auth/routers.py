@@ -3,10 +3,9 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from src.utils import get_db
 from src.auth.crud import _create_user
 from src.auth.schemas import UserOut
-
+from src.utils import get_db
 
 router_auth = APIRouter(prefix='/auth', tags=['auth'])
 
