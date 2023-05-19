@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 from src.auth.models import User
 from src.media_upload.models import Media
 
+from pydub.exceptions import CouldntDecodeError
+
 
 def get_user_from_database_by_id_and_UUID(id: int,
                                           UUID: str,
@@ -33,13 +35,19 @@ def _upload_media(id: int, UUID: str,
             status_code=404,
             detail='User do not exists'
         )
-    mp3_file = convert_wav_in_mp3(audio_file)
-    media = Media(
-        author=user.id,
-        UUID=str(uuid4()),
-        file=mp3_file
-    )
-    db.add(media)
-    db.commit()
-    db.refresh(media)
-    return media
+    try:
+        mp3_file = convert_wav_in_mp3(audio_file)
+        media = Media(
+            author=user.id,
+            UUID=str(uuid4()),
+            file=mp3_file
+        )
+        db.add(media)
+        db.commit()
+        db.refresh(media)
+        return media
+    except CouldntDecodeError as e:
+        raise HTTPException(
+            status_code=422,
+            detail=f'Wrong file format: {e}'
+        )

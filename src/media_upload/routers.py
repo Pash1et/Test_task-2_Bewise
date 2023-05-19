@@ -21,6 +21,7 @@ def upload_media(id: int,
                  UUID: str,
                  audio_file: Annotated[bytes, File(...)],
                  db: Annotated[Session, Depends(get_db)]) -> Url:
+    """Загрузка WAV файла по id и UUID пользователя."""
     upload = _upload_media(id, UUID, audio_file, db)
     url = f'http://{HOST}:{PORT}/record?id={upload.id}&user={upload.author}'
     return Url(
@@ -32,6 +33,7 @@ def upload_media(id: int,
                          summary='Скачивание аудиофайла')
 def download_media(id: int, user: int,
                    db: Annotated[Session, Depends(get_db)]):
+    """Скачивание MP3 файл по id юзера и id файла."""
     mp3_data = db.query(Media).filter(
         Media.author == user, Media.id == id
         ).first()

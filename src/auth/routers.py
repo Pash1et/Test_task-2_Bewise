@@ -15,5 +15,8 @@ router_auth = APIRouter(prefix='/auth', tags=['auth'])
                   response_model=UserOut)
 def create_user(username: str,
                 db: Annotated[Session, Depends(get_db)]) -> UserOut:
+    """
+    Создание пользователя. В ответе получаем id и UUID.
+    """
     user = _create_user(username, db)
     return user
