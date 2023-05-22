@@ -1,11 +1,10 @@
-from sqlalchemy import Column, Integer, String
-
-from src.database import Base
+from sqlalchemy.orm import Mapped, mapped_column
+from src.models import Base
 
 
 class User(Base):
     __tablename__ = 'user'
 
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, nullable=False, unique=True)
-    UUID = Column(String, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    username: Mapped[str] = mapped_column(nullable=False, unique=True)
+    UUID: Mapped[str] = mapped_column(nullable=False, unique=True)

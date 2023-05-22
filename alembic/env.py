@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from src.database import Base
+from src.models import Base
 from src.auth.models import User
 from src.media_upload.models import Media
 from config import (DB_HOST, DB_PORT, POSTGRES_DB,
