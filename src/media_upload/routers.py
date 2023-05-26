@@ -1,7 +1,7 @@
 import io
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from fastapi.responses import Response
 from sqlalchemy.orm import Session
 
@@ -17,12 +17,12 @@ media_upload_router = APIRouter()
 @media_upload_router.post('/',
                           summary='Загрузка аудиофайла',
                           response_model=Url)
-def upload_media(id: int,
-                 UUID: str,
-                 audio_file: Annotated[bytes, File(...)],
-                 db: Annotated[Session, Depends(get_db)]) -> Url:
+async def upload_media(id: int,
+                       UUID: str,
+                       audio_file: Annotated[UploadFile, File(...)],
+                       db: Annotated[Session, Depends(get_db)]) -> Url:
     """Загрузка WAV файла по id и UUID пользователя."""
-    upload = _upload_media(id, UUID, audio_file, db)
+    upload = await _upload_media(id, UUID, audio_file, db)
     url = f'http://{HOST}:{PORT}/record?id={upload.id}&user={upload.author}'
     return Url(
         url=url
@@ -43,10 +43,11 @@ def download_media(id: int, user: int,
             detail='File not found'
         )
     content = io.BytesIO(mp3_data.file).read()
+    file_name = mp3_data.file_name
     return Response(
         content=content,
         media_type='audio/mpeg',
         headers={
-            'Content-Disposition': f'attachment; filename="{mp3_data.id}"'
+            'Content-Disposition': f'attachment; filename="{file_name}.mp3"'
         }
     )

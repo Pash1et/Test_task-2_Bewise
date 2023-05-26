@@ -10,3 +10,4 @@ class Media(Base):
     author: Mapped[int] = mapped_column(ForeignKey('user.id'))
     UUID: Mapped[str] = mapped_column(nullable=False)
     file: Mapped[bytes] = mapped_column(nullable=False)
+    file_name: Mapped[str] = mapped_column(nullable=False)

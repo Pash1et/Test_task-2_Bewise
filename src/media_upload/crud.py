@@ -1,7 +1,7 @@
 import io
 from uuid import uuid4
 
-from fastapi import HTTPException
+from fastapi import HTTPException, UploadFile
 from pydub import AudioSegment
 from sqlalchemy.orm import Session
 
@@ -18,7 +18,8 @@ def get_user_from_database_by_id_and_UUID(id: int,
     return user
 
 
-def convert_wav_in_mp3(audio_file: bytes) -> bytes:
+async def convert_wav_in_mp3(audio_file: UploadFile) -> bytes:
+    audio_file = await audio_file.read()
     wav_audio = AudioSegment.from_wav(io.BytesIO(audio_file))
     mp3_audio = io.BytesIO()
     wav_audio.export(mp3_audio, format='mp3')
@@ -27,8 +28,8 @@ def convert_wav_in_mp3(audio_file: bytes) -> bytes:
     return mp3_data
 
 
-def _upload_media(id: int, UUID: str,
-                  audio_file: bytes, db: Session) -> Media:
+async def _upload_media(id: int, UUID: str,
+                        audio_file: UploadFile, db: Session) -> Media:
     user = get_user_from_database_by_id_and_UUID(id, UUID, db)
     if user is None:
         raise HTTPException(
@@ -36,11 +37,13 @@ def _upload_media(id: int, UUID: str,
             detail='User do not exists'
         )
     try:
-        mp3_file = convert_wav_in_mp3(audio_file)
+        mp3_file = await convert_wav_in_mp3(audio_file)
+        file_name = audio_file.filename.split('.')[0]
         media = Media(
             author=user.id,
             UUID=str(uuid4()),
-            file=mp3_file
+            file=mp3_file,
+            file_name=file_name,
         )
         db.add(media)
         db.commit()
