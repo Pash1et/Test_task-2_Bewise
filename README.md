@@ -31,7 +31,6 @@
 - В корне директории test_task-2_bewise создать файл .env и заполнить его по примеру .env.example
 - В папке infra выполнить команду ```docker compose up -d```
 - Перейти по адресу ```http://127.0.0.1:8000/docs```  
-- UPD. Развернул приложение на сервере, посмотреть можно тут: ```https://testtaskgorelov.ddns.net/docs```
 
 ### Примеры запросов
 ![1](https://github.com/Pash1et/Test_task-2_Bewise/assets/64920375/06273489-4125-482b-993e-749c89291fc1)
